@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Cliente } from '../interface/Cliente';
+import { Cliente, ClienteCreate } from '../interface/Cliente';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClienteService {
 
-  private apiUrl = 'http://localhost:8080/clientes'; // 🔹 Ajusta tu backend aquí
+  private apiUrl = 'https://super-capybara-44xrq4rv7jw3q96x-8089.app.github.dev/clientes'; // 🔹 Ajusta tu backend aquí
 
   constructor(private http: HttpClient) {}
 
   // Crear cliente
-  crearCliente(cliente: Cliente): Observable<Cliente> {
+  crearCliente(cliente: ClienteCreate): Observable<Cliente> {
     return this.http.post<Cliente>(this.apiUrl, cliente);
   }
 

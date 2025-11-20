@@ -1,0 +1,101 @@
+<div class="container">
+  <h1>Gestión de Clientes</h1>
+  
+  <!-- Formulario de cliente -->
+  <div class="card">
+    <div class="card-header">
+      <h2>{{ isEditing ? 'Editar Cliente' : 'Nuevo Cliente' }}</h2>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="saveCliente()" #clientForm="ngForm">
+        <div class="form-group">
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" name="nombre" [(ngModel)]="isEditing ? clienteEdit.nombre : cliente.nombre" required class="form-control">
+        </div>
+        
+        <div class="form-group">
+          <label for="direccion">Dirección:</label>
+          <input type="text" id="direccion" name="direccion" [(ngModel)]="isEditing ? clienteEdit.direccion : cliente.direccion" required class="form-control">
+        </div>
+        
+        <div class="form-group">
+          <label for="telefono">Teléfono:</label>
+          <input type="text" id="telefono" name="telefono" [(ngModel)]="isEditing ? clienteEdit.telefono : cliente.telefono" required class="form-control">
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" [(ngModel)]="isEditing ? clienteEdit.email : cliente.email" required class="form-control">
+        </div>
+        
+        <div class="form-group">
+          <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+          <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" [(ngModel)]="isEditing ? clienteEdit.fecha_nacimiento : cliente.fecha_nacimiento" required class="form-control">
+        </div>
+        
+        <div class="form-group">
+          <label for="status">Estado:</label>
+          <select id="status" name="status" [(ngModel)]="isEditing ? clienteEdit.status : cliente.status" class="form-control">
+            <option value="A">Activo</option>
+            <option value="I">Inactivo</option>
+          </select>
+        </div>
+        
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" [disabled]="!clientForm.form.valid">
+            {{ isEditing ? 'Actualizar' : 'Crear' }}
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="resetForm()" *ngIf="isEditing">
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Lista de clientes -->
+  <div class="card">
+    <div class="card-header">
+      <h2>Lista de Clientes</h2>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Dirección</th>
+              <th>Teléfono</th>
+              <th>Email</th>
+              <th>Fecha Registro</th>
+              <th>Fecha Nacimiento</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cliente of clientes">
+              <td>{{ cliente.id }}</td>
+              <td>{{ cliente.nombre }}</td>
+              <td>{{ cliente.direccion }}</td>
+              <td>{{ cliente.telefono }}</td>
+              <td>{{ cliente.email }}</td>
+              <td>{{ cliente.fecha_registro | date:'short' }}</td>
+              <td>{{ cliente.fecha_nacimiento }}</td>
+              <td>
+                <span [class]="'status-badge ' + (cliente.status === 'A' ? 'status-active' : 'status-inactive')">
+                  {{ cliente.status === 'A' ? 'Activo' : 'Inactivo' }}
+                </span>
+              </td>
+              <td>
+                <button class="btn btn-sm btn-warning" (click)="editCliente(cliente)">Editar</button>
+                <button class="btn btn-sm btn-danger" (click)="deleteCliente(cliente.id)">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

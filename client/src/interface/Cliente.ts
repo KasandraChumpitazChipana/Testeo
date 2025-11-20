@@ -9,3 +9,13 @@ export interface Cliente {
   status: 'A' | 'I' | string; // Activo/Inactivo u otros valores si los manejas
 }
 
+// Create a separate interface for creating clients without ID
+export interface ClienteCreate {
+  nombre: string;
+  direccion: string;
+  telefono: string;
+  email: string;
+  fecha_registro: string;
+  fecha_nacimiento: string;
+  status: 'A' | 'I' | string;
+}
