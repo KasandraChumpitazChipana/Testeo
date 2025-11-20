@@ -20,7 +20,17 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+This project includes two end-to-end testing frameworks:
+
+### Playwright Tests
+
+Run `npm run test:playwright` to execute the end-to-end tests via Playwright.
+
+### Selenium Tests
+
+Run `npm run test:selenium` to execute the end-to-end tests via Selenium WebDriver.
+
+For more details on the testing setup, see [TESTING.md](TESTING.md).
 
 ## Further help
 
